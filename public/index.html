@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preto e Branco · Editorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    :root {
+      --bg: #f7f7f9;
+      --ink: #0b0b0f;
+      --muted: #6b6b7a;
+      --card: rgba(255, 255, 255, 0.85);
+      --accent: #111;
+      --border: #e2e2ea;
+      --shadow: 0 28px 60px rgba(0, 0, 0, 0.1);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at 20% 20%, rgba(0, 0, 0, 0.04), transparent 24%),
+                  radial-gradient(circle at 80% 0%, rgba(0, 0, 0, 0.04), transparent 22%),
+                  var(--bg);
+      min-height: 100vh;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      overflow-x: hidden;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 26px clamp(18px, 3vw, 40px) 70px;
+      position: relative;
+    }
+
+    .glass-ribbon {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(180% 130% at 16% 10%, rgba(255, 255, 255, 0.45), transparent 52%),
+                  radial-gradient(100% 120% at 80% 0%, rgba(255, 255, 255, 0.2), transparent 60%);
+      z-index: -1;
+      filter: blur(1px);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 24px;
+      z-index: 20;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.55));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .masthead__logo {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 38px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #000, #444, #000);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .masthead__tagline {
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 12px 18px;
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 100px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease;
+    }
+
+    .site-nav.navbar-hidden {
+      opacity: 0;
+      transform: translateY(-14px);
+      box-shadow: none;
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      border-radius: 12px;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .site-nav a:hover {
+      background: #0b0b0f;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    main {
+      margin-top: 34px;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 4vw, 40px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(0, 0, 0, 0.02), rgba(255, 255, 255, 0.45));
+      pointer-events: none;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .article-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 46px);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .article-subtitle {
+      font-size: 1.06rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #0b0b0f;
+      color: #fff;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .quote {
+      margin: 36px 0;
+      padding: 22px 24px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.72));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(0,0,0,0.04), transparent 40%);
+      pointer-events: none;
+    }
+
+    .quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .quote figcaption {
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .article-body {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .article-body p {
+      font-size: 1.05rem;
+      color: #1c1c23;
+    }
+
+    .article-body blockquote {
+      border-left: 3px solid #0b0b0f;
+      padding-left: 16px;
+      font-style: italic;
+      font-size: 1rem;
+      color: #191922;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 28px 0 10px;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 16px 26px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .info-card h4 {
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    .info-card p {
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 0.85rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer small {
+      display: block;
+      margin-top: 8px;
+      color: #0b0b0f;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .masthead {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .site-nav {
+        top: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-ribbon"></div>
+  <div class="page">
+    <header class="site-header">
+      <div class="masthead animate__animated animate__fadeInDown">
+        <div class="masthead__logo">Preto e Branco</div>
+        <div class="masthead__tagline">Edição curada · Sem ruídos</div>
+      </div>
+      <nav class="site-nav" id="navbar">
+        <a href="#">Notícias</a>
+        <a href="#">Opinião</a>
+        <a href="#">Magazines</a>
+        <a href="#">Ciência</a>
+        <a href="#">Saúde</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-card animate__animated animate__fadeInUp animate__delay-1s">
+        <div class="section-kicker">Magazine</div>
+        <h1 class="article-title">Preto e Branco — uma ode ao contraste perfeito</h1>
+        <p class="article-subtitle">Narrativas com textura editorial, ritmo delicado e um toque de irreverência que caberia na homepage do awwwards.</p>
+        <div class="article-meta">
+          <span class="badge">Mussum Ipsum</span>
+          <span>18 de fevereiro de 1983</span>
+          <span>Tempo de leitura · 6 min</span>
+        </div>
+
+        <figure class="quote">
+          <blockquote>“Copo furadis é disculpa de bebadis.”</blockquote>
+          <figcaption>Mussum</figcaption>
+        </figure>
+
+        <div class="article-body">
+          <p>Mussum Ipsum, cacilds vidis litro abertis. Per aumento de cachacis, eu reclamis. Quem num gosta di mim que vai caçá sua turmis! Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget.</p>
+          <p>Primeiro eu queria cumprimentar os internautas. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per. Em pé, comendo gazela. Casamentiss faiz malandris se pirulitá.</p>
+          <blockquote>Todas as descrições das pessoas são sobre a humanidade. Interagi no meio de uma coisa chamada humanidade.</blockquote>
+          <p>Sapien in monti palavris. Aenean a interdum magna. Quisque eleifend ac lectus sed. Nec orci ornare consequat. Mauris aliquet nunc non turpis scelerisque, eget. Viva Forevis aptent taciti sociosqu ad litora torquent.</p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h4>Detalhe</h4>
+            <p>Grid modular, tipografia editorial e microinterações em preto e branco, pensadas para leitura confortável.</p>
+          </div>
+          <div class="info-card">
+            <h4>Experiência</h4>
+            <p>Navbar colada no topo com fade, cartões glassmorphism e sombras suaves para profundidade moderna.</p>
+          </div>
+          <div class="info-card">
+            <h4>Perfomance</h4>
+            <p>Somente HTML e CSS nativos, carregamento otimizado com poucas dependências externas.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      © 2025 · Layout curado para um olhar awwwards
+      <small>Preto e Branco — edição autoral</small>
+    </footer>
+  </div>
+
+  <script>
+    let prevScrollPos = window.pageYOffset;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollPos > currentScrollPos || currentScrollPos < 60) {
+        navbar.classList.remove('navbar-hidden');
+      } else {
+        navbar.classList.add('navbar-hidden');
+      }
+      prevScrollPos = currentScrollPos;
+    });
+  </script>
+</body>
+</html>
